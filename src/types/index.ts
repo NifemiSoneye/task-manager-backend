@@ -4,3 +4,8 @@ export interface IUser {
   email: string;
   refreshToken?: string[];
 }
+
+export interface IBoard {
+  title: string;
+  user: any;
+}
