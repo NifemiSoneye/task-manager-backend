@@ -9,9 +9,14 @@ import authRoutes from "./routes/authRoutes";
 import boardRoutes from "./routes/boardRoutes";
 import dependentTaskRoutes from "./routes/dependentTaskRoutes";
 import independentTaskRoutes from "./routes/independentTaskRoute";
+import connectDB from "./config/dbConn";
+import { logEvents } from "./middleware/logger";
+import errorHandler from "./middleware/errorHandler";
 const app = express();
 const PORT = process.env.PORT || 3500;
+connectDB();
 app.use(cors());
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -32,4 +37,16 @@ app.all(/.*/, (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use(errorHandler);
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log(err);
+  logEvents(
+    `${err.no}: ${err.code}\t ${err.syscall}\t${err.hostname}`,
+    "mongoErrLog.log",
+  );
+});
