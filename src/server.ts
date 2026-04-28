@@ -10,12 +10,14 @@ import boardRoutes from "./routes/boardRoutes";
 import dependentTaskRoutes from "./routes/dependentTaskRoutes";
 import independentTaskRoutes from "./routes/independentTaskRoute";
 import connectDB from "./config/dbConn";
-import { logEvents } from "./middleware/logger";
+import { logEvents, logger } from "./middleware/logger";
 import errorHandler from "./middleware/errorHandler";
+import corsOptions from "./config/corsOptions";
 const app = express();
 const PORT = process.env.PORT || 3500;
 connectDB();
-app.use(cors());
+app.use(logger);
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());

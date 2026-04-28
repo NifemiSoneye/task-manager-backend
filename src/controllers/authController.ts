@@ -60,12 +60,12 @@ const handleLogin = asyncHandler(
           },
         },
         process.env.ACCESS_TOKEN_SECRET as string,
-        { expiresIn: "30s" },
+        { expiresIn: "10m" },
       );
       const newRefreshToken = jwt.sign(
         { email: foundUser.email },
         process.env.REFRESH_TOKEN_SECRET as string,
-        { expiresIn: "1m" },
+        { expiresIn: "15m" },
       );
 
       let newRefreshTokenArray = !cookies?.jwt
@@ -166,13 +166,13 @@ const handleRefresh = asyncHandler(
             },
           },
           process.env.ACCESS_TOKEN_SECRET as string,
-          { expiresIn: "10s" },
+          { expiresIn: "10m" },
         );
 
         const newRefreshToken = jwt.sign(
           { email: foundUser.email },
           process.env.REFRESH_TOKEN_SECRET as string,
-          { expiresIn: "1m" },
+          { expiresIn: "15m" },
         );
         //Saving refreshToken with current user
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];

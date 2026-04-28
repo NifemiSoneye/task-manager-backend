@@ -1,0 +1,8 @@
+20260425	10:28:38	dd88d84d-e340-41b4-b4be-2d5b195e691c	 ValidationError : Task validation failed: priority: `High` is not a valid enum value for path `priority`.
+20260425	10:30:01	f1915fd9-a218-4142-a71a-a3da76bc5442	 Error : Cannot set headers after they are sent to the client
+20260425	10:30:03	20e8798e-817a-45cd-8c83-4c76f42b15a9	 Error : Cannot set headers after they are sent to the client
+20260425	10:30:41	93019d4f-d46d-47ec-a782-e9cbe3fa9a2a	 SyntaxError : Unexpected token '"', ""{\n  \"em"... is not valid JSON
+20260425	10:34:44	ac195c4b-f477-457e-bb49-6b24a5dac776	 Error : Cannot set headers after they are sent to the client
+20260425	10:35:24	acbdc925-50ec-4455-b85d-b1a79c5a0c92	 Error : Cannot set headers after they are sent to the client
+20260425	10:37:10	79b77b6b-f93c-4257-b97d-94dae8f7e9d0	 Error : Cannot set headers after they are sent to the client
+20260425	10:42:14	85068809-3080-4180-a554-e9790d37ad59	 SyntaxError : Unexpected token '"', ""{\n  \"ti"... is not valid JSON
