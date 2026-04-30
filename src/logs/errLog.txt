@@ -6,3 +6,4 @@
 20260425	10:35:24	acbdc925-50ec-4455-b85d-b1a79c5a0c92	 Error : Cannot set headers after they are sent to the client
 20260425	10:37:10	79b77b6b-f93c-4257-b97d-94dae8f7e9d0	 Error : Cannot set headers after they are sent to the client
 20260425	10:42:14	85068809-3080-4180-a554-e9790d37ad59	 SyntaxError : Unexpected token '"', ""{\n  \"ti"... is not valid JSON
+20260429	23:34:50	8c06b690-42ea-4c4c-81f3-bf26ac5576bb	 MongoServerSelectionError : connection <monitor> to 65.62.37.72:27017 closed

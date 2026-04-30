@@ -14,12 +14,12 @@ const handleRegister = asyncHandler(
     if (!username || !password || !email) {
       res
         .status(400)
-        .json({ Message: "Username ,password and email are required." });
+        .json({ message: "Username ,password and email are required." });
       return;
     }
     const duplicate = await User.findOne({ email: email }).exec();
     if (duplicate) {
-      res.sendStatus(409);
+      res.status(409).json({ message: "Duplicate email." });
       return;
     }
     const hashedPwd: string = await bcrypt.hash(password, 10);
@@ -40,7 +40,7 @@ const handleLogin = asyncHandler(
     const cookies = req.cookies;
     const { email, password }: { email: string; password: string } = req.body;
     if (!email || !password) {
-      res.status(400).json({ Message: "Username and password are required." });
+      res.status(400).json({ message: "Username and password are required." });
       return;
     }
     const foundUser = await User.findOne({ email: email }).exec();
@@ -68,8 +68,10 @@ const handleLogin = asyncHandler(
         { expiresIn: "15m" },
       );
 
+      const MAX_SESSIONS = 2;
+
       let newRefreshTokenArray = !cookies?.jwt
-        ? (foundUser.refreshToken ?? [])
+        ? (foundUser.refreshToken ?? []).slice(-MAX_SESSIONS + 1) // keep latest N-1, make room for new
         : (foundUser.refreshToken?.filter((rt) => rt !== cookies.jwt) ?? []);
       if (cookies.jwt) {
         const refreshToken = cookies.jwt;
