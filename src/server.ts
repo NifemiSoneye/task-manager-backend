@@ -13,6 +13,7 @@ import connectDB from "./config/dbConn";
 import { logEvents, logger } from "./middleware/logger";
 import errorHandler from "./middleware/errorHandler";
 import corsOptions from "./config/corsOptions";
+import analyticsRouter from "./routes/analyticsRouter";
 const app = express();
 const PORT = process.env.PORT || 3500;
 connectDB();
@@ -27,6 +28,7 @@ app.use("/auth", authRoutes);
 app.use("/boards", boardRoutes);
 app.use("/boards", dependentTaskRoutes);
 app.use("/tasks", independentTaskRoutes);
+app.use("/analytics", analyticsRouter);
 
 app.all(/.*/, (req, res) => {
   res.status(404);
