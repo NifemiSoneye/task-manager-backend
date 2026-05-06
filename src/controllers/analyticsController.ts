@@ -11,7 +11,7 @@ const handleAnalytics = asyncHandler(
 
     const [tasksDone, inProgress, toDo] = await Promise.all([
       Task.countDocuments({ board: { $in: boardIds }, status: "done" }),
-      Task.countDocuments({ board: { $in: boardIds }, status: "in-progress" }),
+      Task.countDocuments({ board: { $in: boardIds }, status: "inprogress" }),
       Task.countDocuments({ board: { $in: boardIds }, status: "todo" }),
     ]);
 

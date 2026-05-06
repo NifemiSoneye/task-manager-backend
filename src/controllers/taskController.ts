@@ -1,6 +1,7 @@
 import Task from "../model/Task";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
+import { count } from "console";
 
 const getTasksByBoard = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
@@ -8,7 +9,10 @@ const getTasksByBoard = asyncHandler(
     const tasks = await Task.find({
       board: boardId,
     }).lean();
-    res.json(tasks);
+    const tasksDone = tasks.filter((t) => t.status === "done").length;
+    const inProgress = tasks.filter((t) => t.status === "inprogress").length;
+    const toDo = tasks.filter((t) => t.status === "todo").length;
+    res.json({ tasks, taskCount: tasks.length, tasksDone, inProgress, toDo });
   },
 );
 const createTask = asyncHandler(
