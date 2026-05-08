@@ -57,6 +57,7 @@ const handleLogin = asyncHandler(
           UserInfo: {
             email: foundUser.email,
             id: foundUser._id.toString(),
+            username: foundUser.username,
           },
         },
         process.env.ACCESS_TOKEN_SECRET as string,
@@ -165,6 +166,7 @@ const handleRefresh = asyncHandler(
             UserInfo: {
               email: payload.email,
               id: foundUser._id.toString(),
+              username: foundUser.username,
             },
           },
           process.env.ACCESS_TOKEN_SECRET as string,

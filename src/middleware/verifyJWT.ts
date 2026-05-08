@@ -7,6 +7,7 @@ declare global {
       user?: {
         id: string;
         email: string;
+        username: string;
       };
     }
   }
@@ -24,8 +25,14 @@ const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
       if (err) {
         return res.status(403).json({ message: "Forbidden" });
       }
-      const payload = decoded as { UserInfo: { email: string; id: string } };
-      req.user = { email: payload.UserInfo.email, id: payload.UserInfo.id };
+      const payload = decoded as {
+        UserInfo: { email: string; id: string; username: string };
+      };
+      req.user = {
+        email: payload.UserInfo.email,
+        id: payload.UserInfo.id,
+        username: payload.UserInfo.username,
+      };
       next();
     },
   );
