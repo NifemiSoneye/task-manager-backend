@@ -8,7 +8,9 @@ const getTasksByBoard = asyncHandler(
     const { boardId } = req.params;
     const tasks = await Task.find({
       board: boardId,
-    }).lean();
+    })
+      .sort({ order: 1 })
+      .lean();
     const tasksDone = tasks.filter((t) => t.status === "done").length;
     const inProgress = tasks.filter((t) => t.status === "inprogress").length;
     const toDo = tasks.filter((t) => t.status === "todo").length;
@@ -18,7 +20,7 @@ const getTasksByBoard = asyncHandler(
 const createTask = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const { boardId } = req.params;
-    const { title } = req.body;
+    const { title, status } = req.body;
 
     if (!title || !boardId) {
       res.status(400).json({
@@ -38,11 +40,12 @@ const createTask = asyncHandler(
       title,
       board: boardId,
       order: taskcount,
+      status: status ?? "todo",
     };
     const task = await Task.create(taskObject);
 
     if (task) {
-      res.status(201).json({ message: `New Task ${title} created , `, task });
+      res.status(201).json({ message: `New Task "${title}" created , `, task });
     } else {
       res.status(400).json({ message: "Invalid Task data recieved" });
     }
@@ -106,7 +109,7 @@ const deleteTask = asyncHandler(
     }
     const result = await task?.deleteOne();
 
-    res.json(`Board ${task?.title} with ID ${id} deleted`);
+    res.json(`Board "${task?.title}" deleted`);
   },
 );
 

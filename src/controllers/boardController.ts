@@ -1,4 +1,5 @@
 import Board from "../model/Board";
+import Task from "../model/Task";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 
@@ -33,7 +34,9 @@ const createNewBoard = asyncHandler(
     const board = await Board.create(boardObject);
 
     if (board) {
-      res.status(201).json({ message: `New Board ${title} created , `, board });
+      res
+        .status(201)
+        .json({ message: `New Board "${title}" created , `, board });
     } else {
       res.status(400).json({ message: "Invalid Board data recieved" });
     }
@@ -111,6 +114,8 @@ const deleteBoard = asyncHandler(
       });
       return;
     }
+
+    await Task.deleteMany({ board: id }); // delete all tasks first
     const board = await Board.findById(id).exec();
 
     if (!board) {
@@ -126,7 +131,7 @@ const deleteBoard = asyncHandler(
     }
     const result = await board?.deleteOne();
 
-    res.json(`Board ${board?.title} with ID ${id} deleted`);
+    res.json(`Board "${board?.title}" deleted`);
   },
 );
 

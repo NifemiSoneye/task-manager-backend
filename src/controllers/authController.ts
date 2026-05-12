@@ -66,7 +66,7 @@ const handleLogin = asyncHandler(
       const newRefreshToken = jwt.sign(
         { email: foundUser.email },
         process.env.REFRESH_TOKEN_SECRET as string,
-        { expiresIn: "15m" },
+        { expiresIn: "7d" },
       );
 
       const MAX_SESSIONS = 2;
@@ -95,7 +95,7 @@ const handleLogin = asyncHandler(
         httpOnly: true,
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         secure: process.env.NODE_ENV === "production",
-        maxAge: 20 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       });
       res.json({ accessToken });
     } else {
@@ -113,7 +113,9 @@ const handleRefresh = asyncHandler(
     }
     const refreshToken = cookies.jwt;
     res.clearCookie("jwt", { httpOnly: true, sameSite: "lax", secure: false });
-    const foundUser = await User.findOne({ refreshToken }).exec();
+    const foundUser = await User.findOne({
+      refreshToken: { $in: [refreshToken] },
+    }).exec();
 
     //Detected refresh token reuse
     if (!foundUser) {
@@ -176,7 +178,7 @@ const handleRefresh = asyncHandler(
         const newRefreshToken = jwt.sign(
           { email: foundUser.email },
           process.env.REFRESH_TOKEN_SECRET as string,
-          { expiresIn: "15m" },
+          { expiresIn: "7d" },
         );
         //Saving refreshToken with current user
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
@@ -186,7 +188,7 @@ const handleRefresh = asyncHandler(
           httpOnly: true,
           sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
           secure: process.env.NODE_ENV === "production",
-          maxAge: 20 * 1000,
+          maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         res.json({ accessToken });
       },

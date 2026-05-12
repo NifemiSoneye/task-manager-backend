@@ -9,3 +9,22 @@
 20260429	23:34:50	8c06b690-42ea-4c4c-81f3-bf26ac5576bb	 MongoServerSelectionError : connection <monitor> to 65.62.37.72:27017 closed
 20260505	03:17:24	b38106cc-3314-4e66-98f0-ad800419e98c	 ValidationError : Task validation failed: priority: `inprogress` is not a valid enum value for path `priority`.
 20260505	07:32:29	1f4f5339-835c-4846-a92c-e9fda5bcfb98	 MongoServerSelectionError : getaddrinfo ENOTFOUND ac-xkowkzo-shard-00-00.txfqalw.mongodb.net
+20260511	05:39:48	7a2c1d04-69e4-4f55-b09a-f412e511a1e1	 SyntaxError : Unexpected token '"', ""{\n \"tit"... is not valid JSON
+20260511	05:42:57	5e81a73d-f217-4e4c-aefc-bc6d899c5036	 VersionError : No matching document found for id "69ecfafd6b59bc3607b304f9" version 101 modifiedPaths "refreshToken"
+20260511	09:03:07	1ee59b0a-e25a-4c6e-bb85-2e98ce9b9631	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:08	1a2d88eb-49be-4420-ab46-06aa34d55c75	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:08	7ae194b8-f620-45a1-a75f-99402bc56db7	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:09	941b3aac-e6de-4fa1-ab9b-c5a693969529	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:10	579ecb0a-f914-4894-9782-008e07741fcd	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:11	1443fa79-01ca-4f64-a101-3e01b8d1a86c	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:12	0383e7bb-ee0b-4f0a-a4d8-841d0218c68d	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:03:13	d588a441-82f2-4893-a5f9-e02a01770ac2	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:08:08	1b15ff8b-63ea-40dd-8cf4-6724dc984355	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:08:09	4c37484d-a62d-4f9d-83e7-2fff978ecc8a	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:08:10	92f932be-b3fa-4b80-b1de-68e3e2b21427	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:08:11	9c6ecff7-0a01-43c9-af82-e8217b2cbe5e	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:32:55	bf2c0124-8734-4dfe-81fd-1905eeb44343	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260511	09:32:56	6f1e605e-1e16-401a-b78d-9267892c35e8	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "board" for model "Task"
+20260512	09:43:40	fdcda305-9ac3-4d11-ab40-0b9a0b346bf9	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
+20260512	09:44:02	81bf50db-9e7b-48fb-be8a-a9dabf733bd3	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
+20260512	09:45:10	e11fd427-56af-49fc-982e-ec0e3cc0b4c1	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
