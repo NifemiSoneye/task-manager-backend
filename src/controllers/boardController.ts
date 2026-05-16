@@ -3,12 +3,27 @@ import Task from "../model/Task";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 
-const getAllBoards = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
-    const boards = await Board.find({ user: req?.user?.id }).lean();
-    res.json(boards);
-  },
-);
+const getAllBoards = asyncHandler(async (req, res) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 6;
+  const skip = (page - 1) * limit;
+  const search = (req.query.search as string) || "";
+
+  const filter = {
+    user: req?.user?.id,
+    ...(search && { title: { $regex: search, $options: "i" } }),
+  }; // for search due to pagination
+
+  const totalBoards = await Board.countDocuments(filter);
+  const totalPages = Math.ceil(totalBoards / limit);
+  const boards = await Board.find(filter)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .lean();
+
+  res.json({ boards, totalBoards, totalPages, currentPage: page });
+});
 
 const createNewBoard = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
