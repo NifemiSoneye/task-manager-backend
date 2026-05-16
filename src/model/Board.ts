@@ -10,6 +10,10 @@ const boardSchema = new Schema<IBoardDocument>(
       type: String,
       required: true,
     },
+    favourite: {
+      type: Boolean,
+      default: false,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

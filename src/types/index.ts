@@ -7,6 +7,7 @@ export interface IUser {
 
 export interface IBoard {
   title: string;
+  favourite: boolean;
   user: any;
 }
 
