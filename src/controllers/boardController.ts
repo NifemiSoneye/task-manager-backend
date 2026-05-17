@@ -8,10 +8,12 @@ const getAllBoards = asyncHandler(async (req, res) => {
   const limit = parseInt(req.query.limit as string) || 4;
   const skip = (page - 1) * limit;
   const search = (req.query.search as string) || "";
+  const favourite = req.query.favourite === "true";
 
   const filter = {
     user: req?.user?.id,
     ...(search && { title: { $regex: search, $options: "i" } }),
+    ...(favourite && { favourite: true }),
   }; // for search due to pagination
 
   const totalBoards = await Board.countDocuments(filter);
@@ -84,7 +86,7 @@ const getBoard = asyncHandler(
 const updateBoard = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, favourite } = req.body;
 
     if (!id || !title) {
       res.status(400).json({
@@ -114,6 +116,7 @@ const updateBoard = asyncHandler(
     }
 
     board.title = title;
+    board.favourite = favourite;
 
     const updatedBoard = await board.save();
     res.json({ message: `${updatedBoard.title} updated` });
