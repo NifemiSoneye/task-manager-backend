@@ -79,14 +79,12 @@ const handleLogin = asyncHandler(
         const foundToken = await User.findOne({ refreshToken }).exec();
 
         if (!foundToken) {
-          console.log("attempted refresh token reuse at login");
-
           newRefreshTokenArray = [];
         }
         res.clearCookie("jwt", {
           httpOnly: true,
-          sameSite: "lax",
-          secure: false,
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          secure: process.env.NODE_ENV === "production",
         });
       }
       foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
@@ -112,7 +110,11 @@ const handleRefresh = asyncHandler(
       return;
     }
     const refreshToken = cookies.jwt;
-    res.clearCookie("jwt", { httpOnly: true, sameSite: "lax", secure: false });
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
     const foundUser = await User.findOne({
       refreshToken: { $in: [refreshToken] },
     }).exec();
@@ -129,14 +131,12 @@ const handleRefresh = asyncHandler(
           if (!decoded || typeof decoded === "string")
             return res.sendStatus(403);
           if (err) return res.sendStatus(403);
-          console.log("attempted refresh token reuse");
           const hackedUser = await User.findOne({
             email: decoded.email,
           }).exec();
           if (!hackedUser) return;
           hackedUser.refreshToken = [];
           const result = await hackedUser.save();
-          console.log(result);
         },
       );
       res.sendStatus(403);
@@ -156,6 +156,7 @@ const handleRefresh = asyncHandler(
         if (err) {
           foundUser.refreshToken = [...newRefreshTokenArray];
           const result = await foundUser.save();
+          return res.sendStatus(403);
         }
         const payload = decoded as {
           email: string;
@@ -214,7 +215,6 @@ const handleLogout = async (req: Request, res: Response) => {
   foundUser.refreshToken =
     foundUser.refreshToken?.filter((rt) => rt !== refreshToken) ?? [];
   const result = await foundUser.save();
-  console.log(result);
 
   res.clearCookie("jwt", {
     httpOnly: true,
