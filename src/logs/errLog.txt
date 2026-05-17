@@ -28,3 +28,5 @@
 20260512	09:43:40	fdcda305-9ac3-4d11-ab40-0b9a0b346bf9	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
 20260512	09:44:02	81bf50db-9e7b-48fb-be8a-a9dabf733bd3	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
 20260512	09:45:10	e11fd427-56af-49fc-982e-ec0e3cc0b4c1	 CastError : Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Board"
+20260517	07:36:30	a09d5572-a72e-444d-8ad4-004a54fc8cfe	 Error : Not allowed by CORS
+20260517	07:36:30	031f89b5-88b9-4545-878c-2412580443d8	 Error : Not allowed by CORS

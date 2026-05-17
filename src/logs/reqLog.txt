@@ -4443,3 +4443,5 @@
 20260517	06:21:19	2a13a98f-e5f7-4c93-ad00-f7235beaa8d1	 GET	http://localhost:5173	/boards/6a09baa543b3f990df1988c4
 20260517	06:21:21	c19af1e1-6697-43e5-9c8c-107b0c72787d	 OPTIONS	http://localhost:5173	/analytics
 20260517	06:21:21	556c5957-d413-4eff-8167-2fe6a2193a38	 GET	http://localhost:5173	/analytics
+20260517	07:36:30	ed769643-237a-498b-846a-1b4f43eb3ce5	 GET	http://localhost:5174	/refresh
+20260517	07:36:30	697d63ae-495b-4fd5-9051-023651c5948a	 GET	http://localhost:5174	/refresh
